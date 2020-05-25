@@ -17,7 +17,7 @@ export class TodoService {
 
   constructor(private http: HttpClient) {}
 
-  // Get todos
+  // Get todo
   getTodos(): Observable<Todo[]> {
     return this.http.get<Todo[]>(`${this.todosUrl}${this.todosLimit}`);
   }
@@ -26,6 +26,11 @@ export class TodoService {
     const url = `${this.todosUrl}/${todo.id}`;
     return this.http.put(url, todo, httpOptions);
   }
+  // Add todo
+  addTodo(todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(this.todosUrl, todo, httpOptions);
+  }
+
   // Delete todo
   deleteTodo(todo: Todo): Observable<any> {
     const url = `${this.todosUrl}/${todo.id}`;
